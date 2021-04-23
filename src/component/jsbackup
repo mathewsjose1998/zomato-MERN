@@ -1,0 +1,43 @@
+import React,{Component} from 'react'
+
+class Header extends Component {
+    constructor(){
+        super()
+        this.state={
+            title:"edurekaa internshipppp",
+            keyword:'Usr text',
+            city:''
+        }
+    }
+
+    handleChange=(event)=>{
+        this.setState({keyword:event.target.value?event.target.value:'user text'})
+
+    }
+    handleCity=(event)=>{
+        this.setState({city:event.target.value})
+    }
+
+    render(){   //cllass do not return ,render will return 
+        return(
+        <header>
+            <center>
+                <h2>{this.state.title}</h2>
+                <input type="text" onChange={this.handleChange} ></input>
+                <p>{this.state.keyword}</p>
+
+                <select onChange={this.handleCity}>
+                    <option value="delhi">delhi</option>
+                    <option value="pune">pune</option>
+                    <option value="mumbai">mumbai</option>
+                </select>
+                <p>city is {this.state.city}</p>
+            </center>
+            <hr/>
+        </header>
+        )
+    }
+}
+
+
+export default Header;

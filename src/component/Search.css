@@ -1,0 +1,118 @@
+
+.image-container{
+    
+    background: url('https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=653&q=80');
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+.navigation{
+display: flex;
+
+color: #fbfbfb;
+font-size: 20px;
+padding-top: 20px;
+}
+
+.nav1{
+flex-grow: 1;
+padding-left: 30px;
+}
+
+.nav2{
+padding-right: 30px;
+}
+
+.nav3{
+padding-right: 30px;
+}
+
+
+.main-container{
+display: flex;
+
+flex-direction: column;
+align-items: center;
+padding-top: 70px;
+position: relative;
+}
+
+.logo1{
+color: rgb(255, 255, 255);
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+font-weight: 900;
+font-style: italic;
+
+font-size: 80px;
+
+}
+
+.description{
+
+color: rgb(221, 212, 212);
+text-align: center;
+font-size: 30px;
+margin-bottom: 7px;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.search-container{
+
+display: flex;
+padding-bottom: 40px;
+
+
+}
+.locationselector{
+display: flex;
+padding-right: 10px;
+
+}
+
+.marker{
+width: 40px;
+height: 60px;
+background-color: white;
+display: flex;
+justify-content: center;
+align-items: center;
+color: rgb(158, 22, 22);
+font-size: 30px;
+
+}
+.loctn-dropdown{
+height: 60px;
+width: 300px;
+
+}
+.locationselect-dropdown{
+height: 60px;
+width: 100%;
+border: none;
+
+}
+
+.restaurant-selector{
+border-left: 1px solid grey;
+display: flex;
+}
+.Search{
+height: 60px;
+width: 60px;
+background-color: white;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 20px;
+}
+
+.restuarant-dropdown{
+height: 60px;
+
+}
+#restuarantlist{
+height: 60px;
+width: 300px;
+border: none;
+}

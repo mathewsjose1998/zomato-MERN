@@ -1,0 +1,251 @@
+import React, { Component } from 'react'
+import axios from 'axios'
+
+import './Details.css'
+import {Link} from 'react-router-dom'
+
+import DetailsDisplay from './DetailsDisplay'
+class Details extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            cityId:parseInt(sessionStorage.getItem('cityId'))?parseInt(sessionStorage.getItem('cityId')):1,
+            mealtypeId:parseInt(this.props.match.params.id),
+            restuarantList:[],
+            mealdata:``
+        }
+    }
+    
+cuisineFilter=(event)=>{
+    console.log(event.target.value)
+    let cuisineid=event.target.value;
+    let restuarantListUrl;
+    if(cuisineid){
+    restuarantListUrl=`http://localhost:9000/restaurantlist/${this.state.cityId}/${this.state.mealtypeId}?cuisine=${cuisineid}`
+    }
+    else{
+        restuarantListUrl=`http://localhost:9000/restaurantlist/${this.state.cityId}/${this.state.mealtypeId}`
+    }
+    axios.get(restuarantListUrl).then((response)=>{
+            
+        //   console.log(response.data)
+           this.setState({restuarantList:response.data})
+           console.log(this.state.restuarantList)
+           
+           
+       }).catch((error)=>{
+           console.log(error)
+       })
+
+}
+
+costFilter=(event)=>{
+    
+    let cost= (event.target.value).split(',')
+    
+    let lcost=cost[0]
+    let hcost=cost[1]
+    let Url;
+   if(event.target.value){
+    Url=`http://localhost:9000/restaurantlist/${this.state.cityId}/${this.state.mealtypeId}?lcost=${lcost}&hcost=${hcost}`
+   }
+   else{
+       Url=`http://localhost:9000/restaurantlist/${this.state.cityId}/${this.state.mealtypeId}`
+   }
+
+    axios.get(Url).then((response)=>{
+            
+        //   console.log(response.data)
+           this.setState({restuarantList:response.data})
+           console.log(this.state.restuarantList)
+           
+           
+       }).catch((error)=>{
+           console.log(error)
+       })
+
+
+
+
+}
+
+sortFilter=(event)=>{
+    console.log(parseInt(event.target.value))
+    let sort=parseInt(event.target.value);
+let Url
+    if(event.target.value){
+        Url=`http://localhost:9000/restaurantlist/${this.state.cityId}/${this.state.mealtypeId}?sort=${sort}`
+    }
+    else{
+        Url=`http://localhost:9000/restaurantlist/${this.state.cityId}/${this.state.mealtypeId}`
+    }
+    axios.get(Url).then((response)=>{
+            
+        //   console.log(response.data)
+           this.setState({restuarantList:response.data})
+           console.log(this.state.restuarantList)
+           
+           
+       }).catch((error)=>{
+           console.log(error)
+       })
+
+
+    
+}
+
+
+   setfilter=(mealtypes)=>{
+       if(mealtypes){
+        return mealtypes.map((item)=>{
+            return(
+                <div onChange={this.cuisineFilter}>
+                    <label className="form-check">
+                            <input  type="radio" value={item.cuisine} id="checkbox1" name="cuisine"/>
+                            . {item.name}
+                        </label>
+                </div>
+
+                
+            )
+        })
+       }
+       
+
+   }
+    
+
+    render() {
+        
+        return (
+            <div>
+                <div className="row">
+
+                        <div class="col-md-12 header">
+                        <div class="logo">  <Link to='/' style={{ textDecoration: 'none', color:'white' }}> zomato</Link></div>
+                                <div class="loginandsignup">
+                                    <div class="login">Login</div>
+                                    <div class="create">
+                                        <div>Create an account</div>
+                                    </div>
+                                </div>
+                        </div>
+                    
+                            <div className="title" >Breakfast places in Mumbai</div>
+
+                </div>
+            <div className="row">
+                <div className="col-md-3">
+                  
+                <div class="filter">
+                                <div class="filter-title">Filters</div>
+                
+                                <div class="cuisine-checkbox">
+                                    <div class="cuisine-title">Cuisine</div>
+                                    <div onChange={this.cuisineFilter}>
+                                        
+                                            <label className="form-check">
+                                                <input  type="radio" value="" id="checkbox1" name="cuisine"/>
+                                                . All
+                                            </label>
+
+                                    </div>
+
+                                        {this.setfilter(this.state.mealdata)}
+                                    </div>
+                                    <div className="cost-checkbox">
+                                                <div class="cost-title">Cost For Two</div>
+
+                                                <div onChange={this.costFilter}>
+                                                    
+                                                    <label className="form-check">
+                                                        <input  type="radio" value="" id="checkbox1" name="range"/>
+                                                        . All
+                                                    </label>
+
+                                            </div> 
+
+                                                <div onChange={this.costFilter}>
+                                                        <label className="form-check">
+                                                            <input  type="radio" value="0,500" id="checkbox1" name="range"/>
+                                                        . 0-500
+                                                        </label>
+
+                                                </div>
+                                                <div onChange={this.costFilter}>
+                                                        <label className="form-check">
+                                                            <input  type="radio" value="500,1000" id="checkbox1" name="range"/>
+                                                            . 500-1000
+                                                        </label>
+                                                        
+                                                </div>
+
+                                    </div>
+
+                                    <div class="sort-checkbox">
+                                            <div class="sort-title">Sort</div>
+                                                <div onChange={this.sortFilter}>
+                                                        <label className="form-check">
+                                                            <input  type="radio" value="" id="checkbox1" name="sort"/>
+                                                            . Price low to High
+                                                        </label>
+                                                        
+                                                </div>
+                                                <div onChange={this.sortFilter}>
+                                                        <label className="form-check">
+                                                            <input  type="radio" value="-1" id="checkbox1" name="sort"/>
+                                                            . Price High to Low
+                                                        </label>
+                                                        
+                                                </div>
+                    
+                                
+                                        </div>
+                                    
+
+                </div>
+
+
+                  
+                    
+             </div>
+             <div className="col-md-9">
+             <DetailsDisplay restuarants={this.state.restuarantList}  />
+             </div>
+            
+            
+            </div>
+        </div>
+        )
+    }
+
+    componentDidMount(){
+       
+       let restuarantListUrl=`http://localhost:9000/restaurantlist/${this.state.cityId}/${this.state.mealtypeId}`
+       console.log(restuarantListUrl)
+
+        axios.get(restuarantListUrl).then((response)=>{
+            
+         //   console.log(response.data)
+            this.setState({restuarantList:response.data})
+            console.log(this.state.restuarantList)
+            
+            
+        }).catch((error)=>{
+            console.log(error)
+        })
+
+
+        let cuisineUrl=`http://localhost:9000/cusine`
+        axios.get(cuisineUrl).then((response)=>{
+            console.log(response.data)
+            this.setState({mealdata:response.data})
+        })
+
+    }
+            
+            
+    
+}
+
+export default Details;

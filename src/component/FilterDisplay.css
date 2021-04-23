@@ -1,0 +1,37 @@
+.filter{
+    display: flex;
+   
+    background-color: rgb(93, 113, 151);
+    margin: 10px;
+  
+    width: 100%;
+   
+    flex-direction: column;
+    border-radius: 5px;
+
+}
+.filter-title{
+    font-size: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+    color: rgb(69, 83, 146);
+    font-weight: 700;
+
+
+}
+.cuisine-checkbox ,.cost-checkbox,.sort-checkbox{
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+.cuisine-title,.cost-title,.sort-title{
+    font-size: 20px;
+    color: indigo;
+    font-weight: 600;
+}
+.form-check-input{
+    color: gray;
+    padding-bottom: 5px;
+}
